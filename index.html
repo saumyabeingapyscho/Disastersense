@@ -1,22 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>DisasterSense – Risk Map</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DisasterSense - Disaster Risk Assessment</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>DisasterSense – Land Susceptibility Map</h1>
-  <div id="container">
-    <div id="map"></div>
-    <div id="info-panel">
-      <h2>Location Info</h2>
-      <div id="info-content">Click on the map to get details.</div>
+    <div class="header">
+        <h1><i class="fas fa-shield-alt"></i> DisasterSense</h1>
+        <p>Interactive Disaster Risk Assessment for India</p>
     </div>
-  </div>
 
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <script src="script.js"></script>
+    <div class="container">
+        <div class="map-container">
+            <div id="map"></div>
+            
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="control-group">
+                    <label for="disaster-type">Disaster Type</label>
+                    <select id="disaster-type">
+                        <option value="all">All Disasters</option>
+                        <option value="landslide">Landslides</option>
+                        <option value="flood">Floods</option>
+                        <option value="earthquake">Earthquakes</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <button id="locate-btn">
+                        <i class="fas fa-location-arrow"></i> Find My Location
+                    </button>
+                </div>
+            </div>
+
+            <!-- Status Indicator -->
+            <div class="status-indicator">
+                <i class="fas fa-circle status-online"></i>
+                <span id="status-text">System Online</span>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-info-circle"></i> Location Information</h2>
+            </div>
+            <div class="sidebar-content" id="info-content">
+                <div class="info-card">
+                    <h3><i class="fas fa-mouse-pointer"></i> Getting Started</h3>
+                    <p>Click anywhere on the map to get detailed risk assessment and weather information for that location.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile sidebar toggle -->
+        <button class="sidebar-toggle" id="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
