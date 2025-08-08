@@ -2,12 +2,46 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  text-align: center;
   background-color: #f4f4f4;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 10px;
+}
+
+#container {
+  display: flex;
+  height: 90vh;
+  margin: 10px;
+  gap: 10px;
 }
 
 #map {
-  height: 90vh;
-  width: 100%;
-  margin-top: 10px;
+  flex: 3;
+  height: 100%;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+#info-panel {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: left;
+  overflow-y: auto;
+  font-size: 14px;
+}
+
+#info-panel h2 {
+  margin-top: 0;
+  border-bottom: 2px solid #0078A8;
+  padding-bottom: 5px;
+  color: #0078A8;
+}
+
+#info-content p {
+  margin: 8px 0;
 }
