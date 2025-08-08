@@ -1,47 +1,378 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    overflow: hidden;
 }
 
-h1 {
-  margin-top: 10px;
+/* Header */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1000;
 }
 
-#container {
-  display: flex;
-  height: 90vh;
-  margin: 10px;
-  gap: 10px;
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.header p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+}
+
+/* Main container */
+.container {
+    display: flex;
+    height: calc(100vh - 80px);
+    position: relative;
+}
+
+/* Map container */
+.map-container {
+    flex: 1;
+    position: relative;
+    background: #e3f2fd;
 }
 
 #map {
-  flex: 3;
-  height: 100%;
-  border: 2px solid #333;
-  border-radius: 8px;
+    height: 100%;
+    width: 100%;
 }
 
-#info-panel {
-  flex: 1;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  text-align: left;
-  overflow-y: auto;
-  font-size: 14px;
+/* Sidebar */
+.sidebar {
+    width: 350px;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    z-index: 1000;
 }
 
-#info-panel h2 {
-  margin-top: 0;
-  border-bottom: 2px solid #0078A8;
-  padding-bottom: 5px;
-  color: #0078A8;
+.sidebar-header {
+    background: #2c3e50;
+    color: white;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-#info-content p {
-  margin: 8px 0;
+.sidebar-content {
+    padding: 1.5rem;
+}
+
+.info-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #667eea;
+    transition: transform 0.2s ease;
+}
+
+.info-card:hover {
+    transform: translateX(5px);
+}
+
+.info-card h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.info-card p {
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Risk indicators */
+.risk-high { 
+    border-left-color: #e74c3c; 
+}
+
+.risk-medium { 
+    border-left-color: #f39c12; 
+}
+
+.risk-low { 
+    border-left-color: #27ae60; 
+}
+
+.risk-none { 
+    border-left-color: #95a5a6; 
+}
+
+/* Loading states */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.spinner {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #667eea;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Mobile toggle button */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 2000;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background: #5a6fd8;
+    transform: scale(1.1);
+}
+
+/* Control panel */
+.control-panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 1rem;
+    z-index: 1000;
+    min-width: 200px;
+}
+
+.control-group {
+    margin-bottom: 1rem;
+}
+
+.control-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    font-size: 0.9rem;
+}
+
+.control-group select, 
+.control-group button {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+}
+
+.control-group select:focus,
+.control-group button:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.control-group button {
+    background: #667eea;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.control-group button:hover {
+    background: #5a6fd8;
+}
+
+/* Status indicator */
+.status-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    font-size: 0.8rem;
+    z-index: 1000;
+}
+
+.status-online {
+    color: #27ae60;
+}
+
+.status-offline {
+    color: #e74c3c;
+}
+
+/* Weather widget */
+.weather-widget {
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.weather-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.weather-temp {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Custom leaflet popup styles */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.custom-popup {
+    font-family: inherit;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.custom-popup h4 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.custom-popup .risk-level {
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.risk-level.high {
+    background: #e74c3c;
+    color: white;
+}
+
+.risk-level.medium {
+    background: #f39c12;
+    color: white;
+}
+
+.risk-level.low {
+    background: #27ae60;
+    color: white;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .header p {
+        font-size: 0.8rem;
+    }
+    
+    .sidebar {
+        position: fixed;
+        right: 0;
+        top: 80px;
+        height: calc(100vh - 80px);
+        transform: translateX(100%);
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .sidebar-toggle {
+        display: block;
+    }
+    
+    .control-panel {
+        position: fixed;
+        top: 90px;
+        left: 10px;
+        right: 70px;
+        min-width: auto;
+        padding: 0.5rem;
+    }
+    
+    .control-group {
+        margin-bottom: 0.5rem;
+    }
+    
+    .status-indicator {
+        bottom: 10px;
+        left: 10px;
+        padding: 0.3rem 0.8rem;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .control-panel {
+        padding: 0.3rem;
+    }
+    
+    .control-group label {
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .control-group select,
+    .control-group button {
+        padding: 0.4rem;
+        font-size: 0.8rem;
+    }
+    
+    .info-card {
+        padding: 0.8rem;
+    }
+    
+    .sidebar-content {
+        padding: 1rem;
+    }
 }
